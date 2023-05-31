@@ -29,7 +29,7 @@ public class HeartMeter extends AppCompatActivity {
 	private static final int[] beatsArray = new int[beatsArraySize];
 	private static SurfaceView preview = null;
 	private static SurfaceHolder previewHolder = null;
-	private static Camera camera = null;
+	static Camera camera = null;
 	private static View image = null;
 	private static TextView text = null;
 	private static PowerManager.WakeLock wakeLock = null;
@@ -237,8 +237,7 @@ public class HeartMeter extends AppCompatActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		wakeLock.acquire();
+		wakeLock.acquire(10*60*1000L /*10 minutes*/);
 
 		camera = Camera.open();
 

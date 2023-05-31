@@ -1,11 +1,14 @@
 package com.swatitiwari.tracktofit.fitnessCalculator;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.gson.Gson;
 import com.swatitiwari.tracktofit.R;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -40,6 +43,7 @@ public class HeartGraph extends AppCompatActivity {
 				Users user = dataSnapshot.getValue(Users.class);
 				ArrayList<Entry> entries = new ArrayList<>();
 				assert user != null;
+				Log.e("46", "onDataChange: "+new Gson().toJson(entries) );
 				ArrayList<Integer> data = user.getHeartbeat();
 				for (int i = 1; i < data.size(); i++) {
 					entries.add(new Entry(i - 1, data.get(i)));

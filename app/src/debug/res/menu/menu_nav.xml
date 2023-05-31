@@ -59,6 +59,10 @@
                 android:id="@+id/sugarstats"
                 android:icon="@drawable/ic_restaurant_black_24dp"
                 android:title="Sugar level stats" />
+            <item
+                android:id="@+id/waterlevel"
+                android:icon="@drawable/water_glass"
+                android:title="Water level" />
         </menu>
     </item>
 

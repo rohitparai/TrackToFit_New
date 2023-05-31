@@ -9,11 +9,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.swatitiwari.tracktofit.Activities.MainActivity;
 import com.swatitiwari.tracktofit.Activities.UserTimeline;
 import com.swatitiwari.tracktofit.R;
@@ -53,13 +55,7 @@ public class FitnessMainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-				!= PackageManager.PERMISSION_GRANTED) {
-			// Permission is not granted
-			ActivityCompat.requestPermissions(this,
-					new String[]{Manifest.permission.CAMERA},
-					100);
-		}
+
 
 		loadPreferences();
 

@@ -39,7 +39,7 @@ public class push_notification extends IntentService {
 	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.e("NSP", "Reached Here by NSP");
+		Log.e("42", "push_notification Reached Here by NSP");
 		WakefulBroadcastReceiver.completeWakefulIntent(intent);
 		loadPreferencesMob();
 		loadPreferences();

@@ -1,5 +1,7 @@
 package com.swatitiwari.tracktofit.fitnessCalculator;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,8 +45,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -52,12 +57,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermissionUtil;
+import com.gun0912.tedpermission.normal.TedPermission;
+import com.swatitiwari.tracktofit.Activities.MainActivity;
+import com.swatitiwari.tracktofit.Activities.WaterActivity;
 import com.swatitiwari.tracktofit.R;
 import com.swatitiwari.tracktofit.fitnessCalculator.predictivemodels.Classification;
 import com.swatitiwari.tracktofit.fitnessCalculator.predictivemodels.TensorFlowClassifier;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class FrontActivity extends AppCompatActivity implements SensorEventListener, TextToSpeech.OnInitListener, SurfaceHolder.Callback {
@@ -88,7 +100,9 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 	private int age, weight, height, sex;
 	private SensorManager sensorManager;
 	private Sensor sensor;
-
+	int stepcount = 0;
+	boolean isGranted;
+	List<String> deniedPermissions;
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -98,22 +112,33 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 		return super.onOptionsItemSelected(item);
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_front);
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+				!= PackageManager.PERMISSION_GRANTED) {
+			// Permission is not granted
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.CAMERA},
+					100);
+		}
 		MOB_NUMBER = getIntent().getStringExtra("MOB_NUMBER");
-
 		checkFamilyHealth();
 		FIRST_TIME = true;
-
 		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+		sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
 		loadUserData();
 		schedulealarm();
+		//schedulealarm();
 		loadModel();
 
 		int index = getFrontCameraId();
 		if (index == -1) {
+			Log.e("130", "getFrontCameraId: "+index );
 			Toast.makeText(getApplicationContext(), "No front camera", Toast.LENGTH_LONG).show();
 		} else {
 			iv_image = (ImageView) findViewById(R.id.imageView);
@@ -182,6 +207,12 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 						return true;
 					case R.id.stepsstats:
 						intent = new Intent(FrontActivity.this, StepsGraph.class);
+						intent.putExtra("MOB_NUMBER", MOB_NUMBER);
+						intent.putExtra("STEPS", stepcount);
+						startActivity(intent);
+						return true;
+					case R.id.waterlevel:
+						intent = new Intent(FrontActivity.this, WaterActivity.class);
 						intent.putExtra("MOB_NUMBER", MOB_NUMBER);
 						startActivity(intent);
 						return true;
@@ -402,11 +433,9 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 	public void onResume() {
 		super.onResume();
 		running = true;
-		sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-		//   if(sensorManager!=null)
-		//      Log.e("ashu","ashu");
+
 		if (sensor != null) {
-			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
 		} else {
 			Toast.makeText(this, "Sensor not found!!!", Toast.LENGTH_SHORT).show();
 		}
@@ -420,15 +449,21 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
-		if (running) {
-			steps.setText(String.valueOf(sensorEvent.values[0]));
-			saveTable1(String.valueOf(sensorEvent.values[0]));
-			String burnt1 = loadPreferences("burnt");
+		Log.e("431", "onSensorChanged: "+sensorEvent);
+		if (sensorEvent != null) {
+			if (running) {
+				stepcount = (int) sensorEvent.values[0];
+				steps.setText(String.valueOf(sensorEvent.values[0]));
+				saveTable1(String.valueOf(sensorEvent.values[0]));
+				String burnt1 = loadPreferences("burnt");
 
-			int x = Integer.parseInt(burnt1);
-			int z = (int) (0.05 * Double.parseDouble(steps.getText().toString()));
-			saveTable(x + z + "");
+				int x = Integer.parseInt(burnt1);
+				int z = (int) (0.05 * Double.parseDouble(steps.getText().toString()));
+				saveTable(x + z + "");
+				Log.e("455", "onSensorChanged: "+sensorEvent.values[0] );
+			}
 		}
+
 	}
 
 	private void saveTable(String ans) {
@@ -546,6 +581,7 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 				ArrayList<String> family = user.getFamily();
 				for (int i = 1; i < family.size(); i++) {
 					Users member = dataSnapshot.child(family.get(i)).getValue(Users.class);
+					Log.e("596", "onDataChange: "+new Gson().toJson(member));
 					assert member != null;
 					int sugar = 100, systole = 100;
 					if (member.getSugar().size() > 1)
@@ -568,7 +604,9 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 					}
 					if (sugar > 120 || sugar < 55 || systole < 90 || systole > 180 || depcount >= 8) {
 						createNotificationChannel();
-						notification(family.get(i), member);
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+							notification(family.get(i), member);
+						}
 					}
 				}
 			}
@@ -598,11 +636,11 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 		}
 	}
 
-	@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	private void notification(String mob, Users user) {
 		Intent intent = new Intent(this, Friends.class);
 		intent.putExtra("MOB", mob);
-		PendingIntent pendingintent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent pendingintent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 		//PendingIntent pendingintent = stackBuilder.getPendingIntent(0 , PendingIntent.FLAG_UPDATE_CURRENT);
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Unhealthy person notify")
 				.setSmallIcon(R.mipmap.ic_launcher_round)
@@ -639,6 +677,7 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+		Log.e("663", "onPictureTaken: " );
 		if (FIRST_TIME) {
 			parameters = mCamera.getParameters();
 			mCamera.setParameters(parameters);
@@ -652,6 +691,7 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 					matrix.postRotate(-90);
 					Bitmap rotatedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
 					iv_image.setImageBitmap(rotatedBitmap);
+					Log.e("676", "onPictureTaken: " );
 					detectEmotion();
 				}
 			};
@@ -661,6 +701,7 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 	}
 
 	int getFrontCameraId() {
+		Log.e("684", "getFrontCameraId: " );
 		Camera.CameraInfo ci = new Camera.CameraInfo();
 		for (int i = 0; i < Camera.getNumberOfCameras(); i++) {
 			Camera.getCameraInfo(i, ci);
@@ -669,14 +710,15 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 		return -1; // No front-facing camera found
 	}
 
+
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		int index = getFrontCameraId();
 		if (index == -1) {
-//			Toast.makeText(getApplicationContext(), "No front camera", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "No front camera", Toast.LENGTH_LONG).show();
 		} else {
 			mCamera = Camera.open(index);
-//			Toast.makeText(getApplicationContext(), "With front camera", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), "With front camera", Toast.LENGTH_LONG).show();
 		}
 		mCamera = Camera.open(index);
 		try {
@@ -736,10 +778,13 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 				//if it can't classify, output a question mark
 				if (res.getLabel() == null) {
 					text = "Status: " + ": ?\n";
+					Log.e("764", "detectEmotion: "+text );
+					//Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 				} else {
 					//else output its name
 					text = String.format("%s: %s, %f\n", "Status: ", res.getLabel(),
 							res.getConf());
+					Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 					final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users/" + MOB_NUMBER);
 					myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 						@Override
@@ -767,7 +812,8 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 				mCamera = null;
 			}
 
-			Toast.makeText(FrontActivity.this, text, Toast.LENGTH_LONG).show();
+			Log.e("771", "detectEmotion: "+text );
+			//Toast.makeText(FrontActivity.this, text, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -789,5 +835,12 @@ public class FrontActivity extends AppCompatActivity implements SensorEventListe
 
 	private Bitmap getResizedBitmap(Bitmap image, int bitmapWidth, int bitmapHeight) {
 		return Bitmap.createScaledBitmap(image, bitmapWidth, bitmapHeight, true);
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		startActivity(new Intent(FrontActivity.this, MainActivity.class));
+		finish();
 	}
 }

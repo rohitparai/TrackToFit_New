@@ -1,0 +1,40 @@
+package com.swatitiwari.tracktofit.Adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.swatitiwari.tracktofit.Pojo.WaterIntakeModel;
+import com.swatitiwari.tracktofit.R;
+
+import java.util.List;
+
+public class WaterIntakeAdapter extends RecyclerView.Adapter<WaterIntakViewHolder> {
+    private final List<WaterIntakeModel> waterIntakes;
+    private final Context context;
+    public WaterIntakeAdapter (List<WaterIntakeModel> waterIntakes, Context context) {
+        this.waterIntakes = waterIntakes;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public WaterIntakViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        return new WaterIntakViewHolder(layoutInflater.inflate(R.layout.water_intake_item, null));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull WaterIntakViewHolder holder, int position) {
+        holder.bindWaterIntake(waterIntakes.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return waterIntakes.size();
+    }
+}
+

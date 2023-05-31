@@ -31,6 +31,7 @@ whether a person is underweight, normal weight,overweight,or obese depending on 
     <string name="Close">Close</string>
     <string name="exit">Exit</string>
 
+    <string name="water_activity">Water Activity</string>
     <string name="dashboard">Dashboard</string>
     <string name="timeline">Timeline</string>
     <string name="quiz_awareness">Quiz 

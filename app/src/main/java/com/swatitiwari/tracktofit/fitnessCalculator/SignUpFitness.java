@@ -1,12 +1,17 @@
 package com.swatitiwari.tracktofit.fitnessCalculator;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.swatitiwari.tracktofit.Activities.MainActivity;
+import com.swatitiwari.tracktofit.Activities.UserTimeline;
 import com.swatitiwari.tracktofit.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +72,7 @@ public class SignUpFitness extends AppCompatActivity {
 	};
 	private TextInputLayout nameLay, mobLay, passLay, ageLay, weightLay, heightLay, sexLay, cityLay, otpLay;
 
+	private ImageView imBack;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,6 +81,7 @@ public class SignUpFitness extends AppCompatActivity {
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setCancelable(false);
 
+		imBack = findViewById(R.id.imBack);
 		signup = findViewById(R.id.button);
 		getOTP = findViewById(R.id.button5);
 
@@ -174,6 +181,10 @@ public class SignUpFitness extends AppCompatActivity {
 					sendVerificationCode();
 				}
 			}
+		});
+		imBack.setOnClickListener(v -> {
+			startActivity(new Intent(SignUpFitness.this, FitnessMainActivity.class));
+			finish();
 		});
 	}
 

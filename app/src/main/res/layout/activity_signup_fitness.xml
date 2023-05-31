@@ -1,13 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="always"
+    android:orientation="vertical"
     tools:context=".fitnessCalculator.SignUpFitness">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_200"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleMarginStart="@dimen/_30sdp"
+        app:titleTextColor="@color/blue_400">
 
-    <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="start">
+
+            <ImageView
+                android:id="@+id/imBack"
+                android:layout_width="@dimen/_27sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:fontFamily="@font/muli_bold"
+                android:text="@string/sign_up"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_17sdp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:overScrollMode="always"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_text_input1"
         style="@style/AppTextLayout"
         android:layout_width="wrap_content"
@@ -221,4 +271,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_text_input8"
         app:layout_constraintVertical_bias="0.335" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
