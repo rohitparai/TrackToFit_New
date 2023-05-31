@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_200"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleMarginStart="@dimen/_30sdp"
+        app:titleTextColor="@color/blue_400">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:gravity="start">
+
+            <ImageView
+                android:id="@+id/imBack"
+                android:layout_width="@dimen/_27sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:fontFamily="@font/muli_bold"
+                android:text="@string/bmi_calcultor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_17sdp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:textSize="22sp"
+            android:fontFamily="@font/muli_bold"
+            android:text="@string/bmi_dec"/>
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/weighing_image"
+                    android:gravity="left"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi_calcultor"
+                    android:layout_marginStart="20dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="200dp"
+            android:layout_marginEnd="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:hint="Enter Your Name ">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:fontFamily="@font/muli_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:background="#e3f2e8"
+                tools:text="Your Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="10dp">
+            <RadioButton
+                android:fontFamily="@font/muli_bold"
+                android:id="@+id/radio_button_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="Male"/>
+            <RadioButton
+                android:fontFamily="@font/muli_bold"
+                android:layout_marginStart="40dp"
+                android:id="@+id/radio_button_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"/>
+        </RadioGroup>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="180dp"
+            android:layout_marginEnd="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:hint="Enter Your Age">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_text_Age"
+                android:background="#e3f2e8"
+                android:fontFamily="@font/muli_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                tools:text="Your Age"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="250dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_marginEnd="50dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/muli_semibold"
+            android:layout_height="50dp"
+            android:text="Enter Your Height"/>
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="80dp"
+
+                android:layout_marginEnd="100dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="20dp"
+                android:hint=" Feet">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edit_View_Feet"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_regular"
+                    android:inputType="number"
+                    android:background="#e3f2e8"
+                    tools:text="Feet"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="80dp"
+                android:layout_marginEnd="150dp"
+                android:layout_height="wrap_content"
+
+
+                android:hint="Inches">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edit_View_Inches"
+                    android:layout_width="100dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="#e3f2e8"
+                    android:fontFamily="@font/muli_regular"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    tools:text=" Inches"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="180dp"
+            android:layout_marginEnd="125dp"
+            android:layout_marginStart="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="Enter Your Weight"
+            tools:ignore="MissingClass">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Edit_View_weight"
+                android:layout_width="180dp"
+                android:background="#e3f2e8"
+                android:fontFamily="@font/muli_regular"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                tools:text="Weight"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <Button
+            android:id="@+id/txtSpeech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Your Text"
+            android:fontFamily="@font/muli_bold"
+            android:onClick="TexttoSpeechButton"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/button_calculate"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/muli_bold"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:hint="Calculate"/>
+
+        <TextView
+            android:id="@+id/Text_View_result"
+            android:layout_width="325dp"
+            android:layout_height="200dp"
+            android:text="   "
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:textSize="@dimen/_15sdp"
+            android:fontFamily="@font/muli_semibold"
+            android:text="Our Nutritional needs change with different life Stages.To be Fit and Healthy,it is important to take into account the extra demands placed on your body by these changes "
+            app:fontFamily="sans-serif-medium"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

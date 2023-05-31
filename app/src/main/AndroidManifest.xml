@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.sensor.stepcounter"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.hardware.sensor.stepcounter" />
+    <uses-permission android:name="android.hardware.sensor.stepdetector" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/applogo"
+        android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
+        android:roundIcon="@mipmap/applogo_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TrackToFit"
+        tools:targetApi="31">
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Activities.UserDashboard"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.UserTimeline"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.SignUp"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.BMICalculator"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.FoodActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.SignIn"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Quiz.MainActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Quiz.BiologyActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Quiz.ChemistryActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Quiz.PhysicsActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Quiz.PlayActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Quiz.HowTo"
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Activities.MainActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.SplashScreen"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.FitnessMainActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.SignUpFitness"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.AddExercise"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.FrontActivity"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit" />
+
+        <activity
+            android:name=".fitnessCalculator.About"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.AddNewFood"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.AddExerciseSearch"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.HeartMeter"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.BloodpressureMeasure"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.AddFoodSearch"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.AddFood"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.CheckSafeSearch"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.CheckSafe"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.Connections"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.Friends"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.SugarMeasure"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.EditProfile"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.StepsGraph"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.SugarLevelGraph"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.CalorieGraph"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <activity
+            android:name=".fitnessCalculator.AddNewExercise"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.HeartGraph"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+
+        <activity
+            android:name=".fitnessCalculator.PhoneSearch"
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.TrackToFit.NoActionBar" />
+        <receiver
+
+            android:name=".fitnessCalculator.AlarmReciever"
+            android:process=":remote" />
+
+        <receiver
+            android:name=".fitnessCalculator.BootWakeUp"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".fitnessCalculator.push_notification"
+            android:exported="false" />
+    </application>
+
+</manifest>

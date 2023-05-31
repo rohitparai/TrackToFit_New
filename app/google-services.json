@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "730888735237",
+    "firebase_url": "https://tracktofit-ae2e4-default-rtdb.firebaseio.com",
+    "project_id": "tracktofit-ae2e4",
+    "storage_bucket": "tracktofit-ae2e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730888735237:android:d1245eb330842d8ec8aa6c",
+        "android_client_info": {
+          "package_name": "com.swatitiwari.tracktofit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730888735237-1ffnlq6a1ej4tjmj56mefajcatrnqdqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swatitiwari.tracktofit",
+            "certificate_hash": "f1b8d8444765cc92da1db16444314b5592815f37"
+          }
+        },
+        {
+          "client_id": "730888735237-vj76u9voe4qpfu61tkac116u6ub4a9ii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP75-SgH7RHZarKM0I4JeGEFrnL5zsWHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730888735237-vj76u9voe4qpfu61tkac116u6ub4a9ii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

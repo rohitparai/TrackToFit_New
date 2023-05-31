@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.swatitiwari.tracktofit'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.swatitiwari.tracktofit"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk.abiFilters 'armeabi', 'arm64-v8a', 'x86', 'x86_64'
+    }
+    android {
+        splits {
+            abi {
+                enable true
+                reset()
+                universalApk true
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    /*-----For Text size-----*/
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+
+    /*-----Room Database-----*/
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    //View Pager Dots Indicator
+    //https://github.com/tommybuonomo/dotsindicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'org.tensorflow:tensorflow-android:+'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-appcheck:16.1.0'
+}
